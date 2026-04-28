@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oscar Martínez Alonso · Piping Design Engineer</title>
+<meta name="description" content="Proyectista MEP con 14 años de experiencia en proyectos industriales, comerciales y hospitalarios. Especialista en BIM-Lean, Revit MEP, AutoCAD Plant 3D y Caesar II.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --navy: #0a1628;
+    --steel: #111f35;
+    --steel2: #162338;
+    --accent: #e8a020;
+    --accent2: #3a8fc4;
+    --light: #f4f1eb;
+    --muted: #7a8fa8;
+    --white: #ffffff;
+  }
+
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--navy); color: var(--white); overflow-x: hidden; }
+
+  /* ─── NAV ─────────────────────────────── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.1rem 3rem;
+    background: rgba(10, 22, 40, 0.96);
+    border-bottom: 1px solid rgba(232, 160, 32, 0.2);
+    backdrop-filter: blur(8px);
+  }
+  .nav-brand { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 4px; color: var(--accent); text-decoration: none; }
+  .nav-links { display: flex; gap: 2.25rem; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.8rem; letter-spacing: 1.5px; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-contact-btn {
+    background: var(--accent); color: var(--navy); padding: 0.55rem 1.4rem;
+    font-size: 0.78rem; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase;
+    border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; text-decoration: none;
+    transition: opacity 0.2s;
+  }
+  .nav-contact-btn:hover { opacity: 0.85; }
+  .nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  .nav-toggle span { display: block; width: 24px; height: 2px; background: var(--white); transition: 0.3s; }
+
+  /* ─── HERO ────────────────────────────── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 9rem 3rem 5rem 4.5rem;
+    position: relative; z-index: 2;
+  }
+  .hero-tag {
+    font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 1.75rem;
+    display: flex; align-items: center; gap: 0.85rem;
+  }
+  .hero-tag::before { content: ''; display: block; width: 44px; height: 1px; background: var(--accent); }
+  .hero-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3.8rem, 6.5vw, 6.5rem);
+    line-height: 0.92;
+    letter-spacing: 2px;
+    margin-bottom: 1.75rem;
+  }
+  .hero-name .accent { color: var(--accent); }
+  .hero-desc {
+    font-size: 0.95rem; color: var(--muted); line-height: 1.75;
+    max-width: 430px; margin-bottom: 3rem;
+  }
+  .hero-stats { display: flex; gap: 3rem; margin-bottom: 3rem; }
+  .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 3.2rem; color: var(--accent); line-height: 1; }
+  .stat-label { font-size: 0.68rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 4px; line-height: 1.4; }
+  .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--accent); color: var(--navy);
+    padding: 0.9rem 2.25rem; font-size: 0.8rem; font-weight: 500;
+    letter-spacing: 2px; text-transform: uppercase; border: none; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; text-decoration: none; display: inline-block;
+    transition: opacity 0.2s;
+  }
+  .btn-primary:hover { opacity: 0.85; }
+  .btn-outline {
+    background: transparent; color: var(--white);
+    padding: 0.9rem 2.25rem; font-size: 0.8rem; letter-spacing: 2px;
+    text-transform: uppercase; border: 1px solid rgba(255,255,255,0.25); cursor: pointer;
+    font-family: 'DM Sans', sans-serif; text-decoration: none; display: inline-block;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+  .hero-right { position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .hero-bg { position: absolute; inset: 0; background: linear-gradient(140deg, var(--steel2) 0%, var(--navy) 100%); }
+  .grid-overlay {
+    position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(58,143,196,0.07) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(58,143,196,0.07) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+  .hero-card {
+    position: relative; z-index: 2;
+    width: 320px; padding: 3rem 2.25rem;
+    border: 1px solid rgba(232,160,32,0.25);
+    background: rgba(10,22,40,0.6);
+    text-align: center;
+  }
+  .corner-tl { position: absolute; top: -1px; left: -1px; width: 22px; height: 22px; border-top: 2px solid var(--accent); border-left: 2px solid var(--accent); }
+  .corner-br { position: absolute; bottom: -1px; right: -1px; width: 22px; height: 22px; border-bottom: 2px solid var(--accent); border-right: 2px solid var(--accent); }
+  .initials-ring {
+    width: 110px; height: 110px; border-radius: 50%;
+    background: var(--accent); display: flex; align-items: center; justify-content: center;
+    font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; color: var(--navy);
+    margin: 0 auto 1.5rem; position: relative;
+  }
+  .initials-ring::before {
+    content: ''; position: absolute; inset: -8px; border-radius: 50%;
+    border: 1px solid rgba(232,160,32,0.35);
+  }
+  .hero-card-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.15rem; letter-spacing: 2px; margin-bottom: 4px; }
+  .hero-card-loc { font-size: 0.72rem; color: var(--muted); margin-bottom: 1.75rem; }
+  .tech-tags { display: flex; flex-wrap: wrap; gap: 0.45rem; justify-content: center; }
+  .tech-tag {
+    font-size: 0.62rem; letter-spacing: 1.2px; text-transform: uppercase;
+    padding: 0.3rem 0.7rem; border: 1px solid rgba(58,143,196,0.35); color: var(--accent2);
+  }
+  .diagonal-accent {
+    position: absolute; bottom: 0; left: 0; right: 0; height: 6px;
+    background: linear-gradient(90deg, var(--accent) 0%, transparent 100%);
+    opacity: 0.6;
+  }
+
+  /* ─── ABOUT BAR ───────────────────────── */
+  .about-bar {
+    background: var(--accent);
+    padding: 2rem 4.5rem;
+    display: flex; gap: 4rem; align-items: center;
+  }
+  .about-bar-label {
+    font-family: 'Bebas Neue', sans-serif; font-size: 1.05rem; letter-spacing: 3px;
+    color: rgba(10,22,40,0.5); flex-shrink: 0;
+    border-right: 2px solid rgba(10,22,40,0.25); padding-right: 4rem;
+  }
+  .about-bar p { font-size: 0.88rem; color: var(--navy); line-height: 1.7; flex: 1; }
+
+  /* ─── SECTIONS ────────────────────────── */
+  section { padding: 5.5rem 4.5rem; }
+  .section-eyebrow {
+    font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 0.75rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .section-eyebrow::before { content: ''; display: block; width: 32px; height: 1px; background: var(--accent); }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+    letter-spacing: 2px; line-height: 1; margin-bottom: 3.5rem;
+  }
+
+  /* ─── EXPERTISE ───────────────────────── */
+  .expertise-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px; background: rgba(58,143,196,0.12);
+  }
+  .expertise-card {
+    background: var(--navy); padding: 2.75rem 2.25rem;
+    border-top: 3px solid transparent;
+    transition: border-color 0.25s, background 0.25s;
+  }
+  .expertise-card:hover { border-top-color: var(--accent); background: var(--steel); }
+  .exp-icon { font-size: 1.8rem; margin-bottom: 1.25rem; line-height: 1; }
+  .exp-title {
+    font-family: 'Bebas Neue', sans-serif; font-size: 1.45rem;
+    letter-spacing: 1px; margin-bottom: 0.9rem; color: var(--white);
+  }
+  .exp-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.75; }
+  .exp-tools { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.4rem; }
+  .tool-pill {
+    font-size: 0.6rem; letter-spacing: 1px; text-transform: uppercase;
+    padding: 0.28rem 0.65rem;
+    background: rgba(58,143,196,0.1); color: var(--accent2);
+    border: 1px solid rgba(58,143,196,0.22);
+  }
+
+  /* ─── EXPERIENCE ──────────────────────── */
+  .exp-section { background: var(--steel); }
+  .timeline { position: relative; padding-left: 2.25rem; max-width: 800px; }
+  .timeline::before {
+    content: ''; position: absolute; left: 0; top: 8px; bottom: 0;
+    width: 1px; background: rgba(232,160,32,0.25);
+  }
+  .timeline-item { position: relative; padding: 0 0 3.5rem 2.75rem; }
+  .timeline-item:last-child { padding-bottom: 0; }
+  .timeline-dot {
+    position: absolute; left: -6px; top: 5px;
+    width: 12px; height: 12px; background: var(--accent); transform: rotate(45deg);
+  }
+  .timeline-period {
+    font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 0.4rem;
+  }
+  .timeline-role { font-family: 'Bebas Neue', sans-serif; font-size: 1.7rem; letter-spacing: 1px; margin-bottom: 0.2rem; }
+  .timeline-company { font-size: 0.85rem; color: var(--accent2); margin-bottom: 0.85rem; }
+  .timeline-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.75; }
+  .timeline-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.85rem; }
+  .timeline-tag {
+    font-size: 0.6rem; letter-spacing: 1px; text-transform: uppercase;
+    padding: 0.22rem 0.6rem; border: 1px solid rgba(255,255,255,0.1); color: var(--muted);
+  }
+
+  /* ─── EDUCATION ───────────────────────── */
+  .edu-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
+  .edu-card {
+    background: var(--steel); padding: 2rem 1.75rem;
+    border-left: 3px solid var(--accent2);
+  }
+  .edu-period { font-size: 0.68rem; color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 0.6rem; }
+  .edu-school { font-family: 'Bebas Neue', sans-serif; font-size: 1.25rem; letter-spacing: 1px; margin-bottom: 0.4rem; }
+  .edu-degree { font-size: 0.8rem; color: var(--muted); line-height: 1.6; }
+
+  /* ─── SKILLS ──────────────────────────── */
+  .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; }
+  .skill-group-title {
+    font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 2px;
+    color: var(--accent); margin-bottom: 1.75rem;
+    padding-bottom: 0.6rem; border-bottom: 1px solid rgba(232,160,32,0.2);
+  }
+  .skill-bar-row { margin-bottom: 1.4rem; }
+  .skill-bar-label {
+    display: flex; justify-content: space-between;
+    font-size: 0.78rem; color: var(--muted); margin-bottom: 0.6rem;
+  }
+  .skill-bar-track { height: 2px; background: rgba(255,255,255,0.07); }
+  .skill-bar-fill { height: 100%; background: var(--accent); }
+  .skill-bar-fill.blue { background: var(--accent2); }
+  .soft-skills { display: flex; flex-wrap: wrap; gap: 0.65rem; margin-top: 0.5rem; }
+  .soft-pill {
+    font-size: 0.75rem; padding: 0.5rem 1.1rem;
+    border: 1px solid rgba(255,255,255,0.12); color: var(--muted);
+  }
+  .courses-list { list-style: none; }
+  .courses-list li {
+    padding: 0.75rem 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+    font-size: 0.82rem; color: var(--muted); display: flex; align-items: center; gap: 0.75rem;
+  }
+  .courses-list li::before { content: '◆'; font-size: 0.45rem; color: var(--accent); flex-shrink: 0; }
+
+  /* ─── CONTACT ─────────────────────────── */
+  .contact-section { background: var(--accent); color: var(--navy); }
+  .contact-section .section-eyebrow { color: rgba(10,22,40,0.55); }
+  .contact-section .section-eyebrow::before { background: rgba(10,22,40,0.4); }
+  .contact-section .section-title { color: var(--navy); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .contact-intro { font-size: 1rem; line-height: 1.75; color: rgba(10,22,40,0.72); }
+  .contact-cta {
+    display: inline-block; margin-top: 2rem;
+    background: var(--navy); color: var(--accent);
+    padding: 0.9rem 2.25rem; font-size: 0.8rem; font-weight: 500;
+    letter-spacing: 2px; text-transform: uppercase; text-decoration: none;
+    transition: opacity 0.2s;
+  }
+  .contact-cta:hover { opacity: 0.85; }
+  .contact-items { display: flex; flex-direction: column; gap: 1.4rem; }
+  .contact-item { display: flex; align-items: center; gap: 1.1rem; }
+  .contact-icon {
+    width: 44px; height: 44px; background: var(--navy); flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; color: var(--accent);
+  }
+  .contact-detail-label {
+    font-size: 0.68rem; letter-spacing: 1.5px; text-transform: uppercase;
+    color: rgba(10,22,40,0.5); margin-bottom: 2px;
+  }
+  .contact-detail { font-size: 0.88rem; color: var(--navy); font-weight: 500; }
+
+  /* ─── FOOTER ──────────────────────────── */
+  footer {
+    background: rgba(0,0,0,0.5);
+    padding: 1.75rem 4.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid rgba(255,255,255,0.04);
+  }
+  footer p { font-size: 0.75rem; color: var(--muted); }
+  .footer-brand { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 3px; color: var(--accent); }
+
+  /* ─── RESPONSIVE ──────────────────────── */
+  @media (max-width: 1024px) {
+    .expertise-grid { grid-template-columns: repeat(2,1fr); }
+    .edu-grid { grid-template-columns: 1fr 1fr; }
+    .skills-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .contact-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .nav-toggle { display: flex; }
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 7rem 1.75rem 3rem; }
+    .hero-right { display: none; }
+    .hero-stats { gap: 2rem; }
+    .about-bar { flex-direction: column; gap: 1rem; padding: 2rem 1.75rem; }
+    .about-bar-label { border-right: none; border-bottom: 1px solid rgba(10,22,40,0.25); padding-right: 0; padding-bottom: 1rem; }
+    section { padding: 4rem 1.75rem; }
+    .expertise-grid { grid-template-columns: 1fr; }
+    .edu-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 0.5rem; padding: 1.5rem 1.75rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── NAV ──────────────────────────────── -->
+<nav>
+  <a class="nav-brand" href="#inicio">OMPRO</a>
+  <div class="nav-links">
+    <a href="#expertise">Especialidades</a>
+    <a href="#experience">Experiencia</a>
+    <a href="#education">Formación</a>
+    <a href="#skills">Habilidades</a>
+    <a href="#contact">Contacto</a>
+  </div>
+  <a class="nav-contact-btn" href="mailto:oscar.proyectos3d@gmail.com">Contactar</a>
+  <div class="nav-toggle" onclick="this.classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ── HERO ──────────────────────────────── -->
+<section id="inicio" class="hero" style="padding:0">
+  <div class="hero-left">
+    <div class="hero-tag">Piping Design Engineer · MEP BIM Specialist</div>
+    <h1 class="hero-name">
+      OSCAR<br>
+      <span class="accent">MARTÍNEZ</span><br>
+      ALONSO
+    </h1>
+    <p class="hero-desc">
+      Proyectista MEP con 14 años de experiencia en proyectos industriales, comerciales y hospitalarios.
+      Especialista en metodología BIM-Lean, modelado Revit MEP, AutoCAD Plant 3D y análisis de flexibilidad
+      en Caesar II.
+    </p>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">14</div>
+        <div class="stat-label">Años de<br>experiencia</div>
+      </div>
+      <div>
+        <div class="stat-num">6+</div>
+        <div class="stat-label">Empresas<br>líderes</div>
+      </div>
+      <div>
+        <div class="stat-num">MEP</div>
+        <div class="stat-label">Especialidad<br>principal</div>
+      </div>
+    </div>
+    <div class="hero-ctas">
+      <a class="btn-primary" href="#expertise">Ver especialidades</a>
+      <a class="btn-outline" href="mailto:oscar.proyectos3d@gmail.com">Contactar</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-bg"></div>
+    <div class="grid-overlay"></div>
+    <div class="hero-card">
+      <div class="corner-tl"></div>
+      <div class="corner-br"></div>
+      <div class="initials-ring">OJM</div>
+      <div class="hero-card-name">Oscar Jesús Martínez Alonso</div>
+      <div class="hero-card-loc">Guadalupe, Nuevo León · México</div>
+      <div class="tech-tags">
+        <span class="tech-tag">Revit MEP</span>
+        <span class="tech-tag">Caesar II</span>
+        <span class="tech-tag">AutoCAD P3D</span>
+        <span class="tech-tag">BIM 360</span>
+        <span class="tech-tag">Navisworks</span>
+        <span class="tech-tag">HVAC</span>
+        <span class="tech-tag">VDC</span>
+        <span class="tech-tag">CAD MEP Fab</span>
+      </div>
+      <div class="diagonal-accent"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ABOUT BAR ──────────────────────────── -->
+<div class="about-bar">
+  <div class="about-bar-label">Perfil</div>
+  <p>
+    Proyectista MEP con enfoque en mejora continua, implementación BIM-Lean y coordinación multidisciplinaria.
+    Experiencia en hospitales, plantas industriales y proyectos comerciales de gran escala. Actualmente
+    desarrollando proyectos de Utilities Piping para Symrise con AutoCAD Plant 3D y coordinación VDC.
+  </p>
+</div>
+
+<!-- ── EXPERTISE ──────────────────────────── -->
+<section id="expertise">
+  <div class="section-eyebrow">Especialidades</div>
+  <div class="section-title">Áreas de Expertise</div>
+  <div class="expertise-grid">
+
+    <div class="expertise-card">
+      <div class="exp-icon">🔧</div>
+      <div class="exp-title">Piping Design</div>
+      <p class="exp-desc">
+        Modelado de tuberías en AutoCAD Plant 3D para generación de isométricos y volumetrías.
+        Análisis de flexibilidad en Caesar II y Autopipe. Tie-in, planos ortogonales y diagramas
+        de proceso en proyectos industriales.
+      </p>
+      <div class="exp-tools">
+        <span class="tool-pill">AutoCAD P3D</span>
+        <span class="tool-pill">Caesar II</span>
+        <span class="tool-pill">Autopipe</span>
+        <span class="tool-pill">Isométricos</span>
+      </div>
+    </div>
+
+    <div class="expertise-card">
+      <div class="exp-icon">🏗️</div>
+      <div class="exp-title">BIM MEP</div>
+      <p class="exp-desc">
+        Modelado BIM multidisciplinario: mecánico, eléctrico, plomería y sistemas especiales.
+        Coordinación de interferencias (clash detection) y gestión documental en plataformas
+        colaborativas BIM 360 y BIM Collaborate.
+      </p>
+      <div class="exp-tools">
+        <span class="tool-pill">Revit MEP</span>
+        <span class="tool-pill">BIM 360</span>
+        <span class="tool-pill">Navisworks</span>
+        <span class="tool-pill">CAD MEP Fab</span>
+      </div>
+    </div>
+
+    <div class="expertise-card">
+      <div class="exp-icon">❄️</div>
+      <div class="exp-title">HVAC</div>
+      <p class="exp-desc">
+        Cálculo de cargas térmicas, flujo de aire, cargas de calor y eficiencia energética.
+        Modelado de sistemas de ductos y equipos en proyectos comerciales, hospitalarios e
+        industriales de gran escala.
+      </p>
+      <div class="exp-tools">
+        <span class="tool-pill">Ductos</span>
+        <span class="tool-pill">Cargas térmicas</span>
+        <span class="tool-pill">Flujo de aire</span>
+        <span class="tool-pill">Climatización</span>
+      </div>
+    </div>
+
+    <div class="expertise-card">
+      <div class="exp-icon">⚡</div>
+      <div class="exp-title">Eléctrico & Sistemas Especiales</div>
+      <p class="exp-desc">
+        Diseño de proyectos verticales en especialidad eléctrica y sistemas especiales.
+        Cálculo de corto circuito con Etap 16. Generación de entregables completos:
+        planos, catálogos, fichas técnicas y volumetrías.
+      </p>
+      <div class="exp-tools">
+        <span class="tool-pill">Etap 16</span>
+        <span class="tool-pill">Corto circuito</span>
+        <span class="tool-pill">Entregables</span>
+        <span class="tool-pill">Sistemas especiales</span>
+      </div>
+    </div>
+
+    <div class="expertise-card">
+      <div class="exp-icon">📐</div>
+      <div class="exp-title">Coordinación VDC / BIM-Lean</div>
+      <p class="exp-desc">
+        Integración de metodología BIM con Lean Construction. Coordinación de modelos,
+        revisión de interferencias y gestión de proyectos en plataformas colaborativas.
+        Atención a reuniones con clientes y coordinación multidisciplinaria.
+      </p>
+      <div class="exp-tools">
+        <span class="tool-pill">BIM-Lean</span>
+        <span class="tool-pill">VDC</span>
+        <span class="tool-pill">Clash Detection</span>
+        <span class="tool-pill">Project</span>
+      </div>
+    </div>
+
+    <div class="expertise-card">
+      <div class="exp-icon">🏭</div>
+      <div class="exp-title">Supervisión de Obra</div>
+      <p class="exp-desc">
+        Supervisión en proyectos de alta complejidad como Hospitales COVID CEMEX.
+        Apoyo en paros de planta, desarrollo de Tie-in, planos AS-BUILT y revisión
+        de proveedores y colaboradores en sitio.
+      </p>
+      <div class="exp-tools">
+        <span class="tool-pill">Supervisión</span>
+        <span class="tool-pill">Tie-in</span>
+        <span class="tool-pill">AS-BUILT</span>
+        <span class="tool-pill">Proveedores</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── EXPERIENCE ──────────────────────────── -->
+<section id="experience" class="exp-section">
+  <div class="section-eyebrow">Trayectoria</div>
+  <div class="section-title">Experiencia Profesional</div>
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-period">Abril 2025 · Actual</div>
+      <div class="timeline-role">Utilities Piping Design</div>
+      <div class="timeline-company">Qualsot para Symrise</div>
+      <p class="timeline-desc">
+        Modelado de tuberías en AutoCAD Plant 3D para generación de volumetrías e isométricos.
+        Coordinación de modelo Revit y revisión de interferencias con proceso de gestión de proyectos
+        (VDC). Apoyo en paros de planta para desarrollo de Tie-in, planos ortogonales y diagramas.
+        Revisión de proveedores y colaboradores en planta de ingeniería.
+      </p>
+      <div class="timeline-tags">
+        <span class="timeline-tag">AutoCAD Plant 3D</span>
+        <span class="timeline-tag">VDC</span>
+        <span class="timeline-tag">Revit</span>
+        <span class="timeline-tag">Tie-in</span>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-period">Sep 2023 · Abril 2025</div>
+      <div class="timeline-role">Proyectista MEP</div>
+      <div class="timeline-company">GTC</div>
+      <p class="timeline-desc">
+        Desarrollo de modelo HVAC (ductos, equipos, etc.) y revisión de clashes subiendo la información
+        al BIM 360. Planos de fabricación para construcción. Desarrollo y coordinación de análisis de
+        flexibilidad en Caesar II y Autopipe. Cálculo de cargas térmicas, flujo de aire, cargas de calor
+        y eficiencia energética.
+      </p>
+      <div class="timeline-tags">
+        <span class="timeline-tag">HVAC</span>
+        <span class="timeline-tag">Caesar II</span>
+        <span class="timeline-tag">Autopipe</span>
+        <span class="timeline-tag">BIM 360</span>
+        <span class="timeline-tag">Fabricación</span>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-period">Jul 2023 · Sep 2023</div>
+      <div class="timeline-role">Proyectista Eléctrico</div>
+      <div class="timeline-company">Secodisa</div>
+      <p class="timeline-desc">
+        Implementación de la metodología BIM en Revit. Generación de entregables de ingeniería
+        completos: planos, catálogos, fichas técnicas y volumetrías.
+      </p>
+      <div class="timeline-tags">
+        <span class="timeline-tag">Revit MEP</span>
+        <span class="timeline-tag">BIM</span>
+        <span class="timeline-tag">Entregables</span>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-period">Feb 2022 · Nov 2022</div>
+      <div class="timeline-role">Modelador MEP</div>
+      <div class="timeline-company">Aire Proyectos</div>
+      <p class="timeline-desc">
+        Atención a reuniones con clientes. Modelado de HVAC, eléctrico y sistemas especiales.
+        Coordinación con clash detection en Navisworks y conciliación de documentación en
+        plataforma BIM 360.
+      </p>
+      <div class="timeline-tags">
+        <span class="timeline-tag">HVAC</span>
+        <span class="timeline-tag">Navisworks</span>
+        <span class="timeline-tag">BIM 360</span>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-period">Mar 2021 · Oct 2021</div>
+      <div class="timeline-role">Modelador MEP</div>
+      <div class="timeline-company">Grupo CYVSA</div>
+      <p class="timeline-desc">
+        Diseñador BIM desarrollando proyectos verticales en especialidad eléctrica y sistemas
+        especiales. Integración con la metodología BIM y Lean construcción.
+      </p>
+      <div class="timeline-tags">
+        <span class="timeline-tag">BIM</span>
+        <span class="timeline-tag">Lean</span>
+        <span class="timeline-tag">Eléctrico</span>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-period">Ene 2018 · Feb 2021</div>
+      <div class="timeline-role">Modelador MEP & Supervisión de Obra</div>
+      <div class="timeline-company">TTQ</div>
+      <p class="timeline-desc">
+        Diseñador BIM y supervisión de obra en proyectos MEP multidisciplinarios. Participación
+        en supervisión de proyectos como Hospitales COVID CEMEX. Diseñador BIM en proyectos
+        verticales de especialidad eléctrica y sistemas especiales.
+      </p>
+      <div class="timeline-tags">
+        <span class="timeline-tag">Supervisión</span>
+        <span class="timeline-tag">Hospital CEMEX</span>
+        <span class="timeline-tag">MEP</span>
+        <span class="timeline-tag">BIM</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── EDUCATION ──────────────────────────── -->
+<section id="education">
+  <div class="section-eyebrow">Formación</div>
+  <div class="section-title">Educación & Cursos</div>
+  <div class="edu-grid">
+    <div class="edu-card">
+      <div class="edu-period">Mayo 2022 · Sep 2025</div>
+      <div class="edu-school">Universidad de Negocios</div>
+      <div class="edu-degree">Ingeniería Mecánica Electricista</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-period">Marzo 2010 · Certificado</div>
+      <div class="edu-school">Universidad del Norte</div>
+      <div class="edu-degree">Lic. en Administración en Tecnologías de la Información</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-period">Jun 2001 · Ago 2005</div>
+      <div class="edu-school">Bachillerato CEBTIS #74</div>
+      <div class="edu-degree">Participación Estatal en Matemáticas — Degeti 2005</div>
+    </div>
+  </div>
+
+  <div style="margin-top: 3rem;">
+    <div class="skill-group-title" style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:2px;color:var(--accent);padding-bottom:0.6rem;border-bottom:1px solid rgba(232,160,32,0.2);margin-bottom:1.5rem;">Cursos y Masterclasses</div>
+    <ul class="courses-list">
+      <li>Cecatis #92 — Diseño Asistido por Computadora (6 meses)</li>
+      <li>TTQ — Curso de Inglés (9 meses)</li>
+      <li>Revit MEP — 30 clases Udemy</li>
+      <li>Etap 16 — Curso básico de corto circuito</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ── SKILLS ──────────────────────────────── -->
+<section id="skills" style="background: var(--steel);">
+  <div class="section-eyebrow">Herramientas & Habilidades</div>
+  <div class="section-title">Dominio Técnico</div>
+  <div class="skills-grid">
+
+    <div>
+      <div class="skill-group-title">Software Especializado</div>
+      <div class="skill-bar-row">
+        <div class="skill-bar-label"><span>AutoCAD / AutoCAD Plant 3D</span><span>95%</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" style="width:95%"></div></div>
+      </div>
+      <div class="skill-bar-row">
+        <div class="skill-bar-label"><span>Revit MEP</span><span>92%</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" style="width:92%"></div></div>
+      </div>
+      <div class="skill-bar-row">
+        <div class="skill-bar-label"><span>BIM 360 / BIM Collaborate</span><span>90%</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" style="width:90%"></div></div>
+      </div>
+      <div class="skill-bar-row">
+        <div class="skill-bar-label"><span>Navisworks</span><span>88%</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" style="width:88%"></div></div>
+      </div>
+      <div class="skill-bar-row">
+        <div class="skill-bar-label"><span>CAD MEP Fabrication</span><span>84%</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" style="width:84%"></div></div>
+      </div>
+      <div class="skill-bar-row">
+        <div class="skill-bar-label"><span>Caesar II 2019</span><span>80%</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" style="width:80%"></div></div>
+      </div>
+      <div class="skill-bar-row">
+        <div class="skill-bar-label"><span>Etap 16</span><span>75%</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" style="width:75%"></div></div>
+      </div>
+      <div class="skill-bar-row">
+        <div class="skill-bar-label"><span>MS Project</span><span>70%</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" style="width:70%"></div></div>
+      </div>
+
+      <div style="margin-top:2.5rem">
+        <div class="skill-group-title">Idiomas</div>
+        <div class="skill-bar-row">
+          <div class="skill-bar-label"><span>Español</span><span>Nativo</span></div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="width:100%"></div></div>
+        </div>
+        <div class="skill-bar-row">
+          <div class="skill-bar-label"><span>Inglés</span><span>Intermedio (Working knowledge)</span></div>
+          <div class="skill-bar-track"><div class="skill-bar-fill blue" style="width:55%"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="skill-group-title">Habilidades Blandas</div>
+      <div class="soft-skills">
+        <span class="soft-pill">Proactividad</span>
+        <span class="soft-pill">Trabajo en equipo</span>
+        <span class="soft-pill">Resolución de problemas</span>
+        <span class="soft-pill">Adaptabilidad</span>
+        <span class="soft-pill">Coordinación multidisciplinaria</span>
+        <span class="soft-pill">Atención al cliente</span>
+        <span class="soft-pill">Metodología BIM-Lean</span>
+        <span class="soft-pill">Gestión de proyectos</span>
+        <span class="soft-pill">Mejora continua</span>
+        <span class="soft-pill">Liderazgo técnico</span>
+      </div>
+
+      <div style="margin-top:2.5rem">
+        <div class="skill-group-title">Especialidades de Ingeniería</div>
+        <div class="soft-skills">
+          <span class="soft-pill">Piping Design</span>
+          <span class="soft-pill">HVAC</span>
+          <span class="soft-pill">Eléctrico</span>
+          <span class="soft-pill">Sistemas especiales</span>
+          <span class="soft-pill">Análisis de flexibilidad</span>
+          <span class="soft-pill">Cargas térmicas</span>
+          <span class="soft-pill">Tie-in</span>
+          <span class="soft-pill">Clash Detection</span>
+          <span class="soft-pill">VDC</span>
+          <span class="soft-pill">Isométricos</span>
+          <span class="soft-pill">Volumetrías</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── CONTACT ──────────────────────────────── -->
+<section id="contact" class="contact-section">
+  <div class="section-eyebrow">Contacto</div>
+  <div class="section-title">Trabajemos Juntos</div>
+  <div class="contact-grid">
+    <div>
+      <p class="contact-intro">
+        ¿Tienes un proyecto MEP, industrial o de infraestructura? Estoy disponible para
+        colaboraciones, consultoría y proyectos de piping design e ingeniería BIM en Monterrey
+        y a nivel nacional. Cuéntame de tu proyecto.
+      </p>
+      <a class="contact-cta" href="mailto:oscar.proyectos3d@gmail.com">Enviar mensaje</a>
+    </div>
+    <div class="contact-items">
+      <div class="contact-item">
+        <div class="contact-icon">✉</div>
+        <div>
+          <div class="contact-detail-label">Correo electrónico</div>
+          <div class="contact-detail">oscar.proyectos3d@gmail.com</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">☎</div>
+        <div>
+          <div class="contact-detail-label">Teléfono / WhatsApp</div>
+          <div class="contact-detail">(52) 81-27-66-4280</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">⊙</div>
+        <div>
+          <div class="contact-detail-label">Ubicación</div>
+          <div class="contact-detail">Guadalupe, Nuevo León, México</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">◎</div>
+        <div>
+          <div class="contact-detail-label">Sitio web</div>
+          <div class="contact-detail">www.ompro.mx</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ──────────────────────────────── -->
+<footer>
+  <span class="footer-brand">OMPRO</span>
+  <p>Oscar Jesús Martínez Alonso · Piping Design Engineer</p>
+  <p>© 2025 · Guadalupe, N.L. · México</p>
+</footer>
+
+</body>
+</html>
